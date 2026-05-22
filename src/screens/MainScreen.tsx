@@ -1,14 +1,13 @@
 import React from "react";
 import {
-  Button,
   FlatList,
   Image,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { themes } from "../theme/theme";
@@ -16,6 +15,8 @@ import { useThemeStore } from "../store/useThemeStore";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { restaurantsData } from "../../data";
+import { useNavigation } from "@react-navigation/native";
+
 
 const restaurants = restaurantsData.restaurants;
 
@@ -52,8 +53,14 @@ const HomeScreen = () => {
   const theme = useThemeStore((state) => state.theme);
   const colors = themes[theme];
   const sortedRestaurants = sortRestaurantsByDistance(restaurants);
+  const navigation = useNavigation<any>()
 
-  const renderFeaturedItem = ({ item }) => (
+  const renderFeaturedItem = ({ item  } ) => (
+    <TouchableOpacity
+    onPress={()=>(navigation.navigate("Restaurant" , {
+      restaurant: item,
+    }))}
+    >
     <View style={[styles.card, { backgroundColor: colors.primary }]}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <Text style={[styles.cardTitle, { color: colors.text }]}>
@@ -66,9 +73,16 @@ const HomeScreen = () => {
         {item.rating} ⭐ · {item.deliveryTime} · {item.priceLevel}
       </Text>
     </View>
+    </TouchableOpacity>
   );
 
-  const renderPopularItem = ({ item }) => (
+   const renderPopularItem = ({ item }) => (
+    <TouchableOpacity
+    onPress={()=>(navigation.navigate("Restaurant" , {
+      restaurant: item,
+    }))}
+    >
+
     <View style={[styles.sideCard, { backgroundColor: colors.primary }]}>
       <Image source={{ uri: item.image }} style={styles.sideCardImage} />
       <View style={styles.sideCardContent}>
@@ -83,6 +97,7 @@ const HomeScreen = () => {
         </Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -97,6 +112,7 @@ const HomeScreen = () => {
           data={sortedRestaurants}
           keyExtractor={(restaurant) => restaurant.id}
           renderItem={renderPopularItem}
+          showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <>
               {/* Search Section */}

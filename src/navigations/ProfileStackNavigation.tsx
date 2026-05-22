@@ -7,7 +7,7 @@ import SettingsScreen from '../screens/SettingScreen'
 
 const Stack = createNativeStackNavigator()
 
-const StackNavigation = () => {
+const ProfileStackNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -15,7 +15,8 @@ const StackNavigation = () => {
         component={ProfileScreen}
         options={{
           headerTitleAlign: "center",
-          title: "Profile"
+          title: "Profile",
+          headerShown: false
         }}
       />
 
@@ -27,4 +28,4 @@ const StackNavigation = () => {
   )
 }
 
-export default StackNavigation
+export default ProfileStackNavigation

@@ -1,16 +1,14 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { Ionicons } from "@expo/vector-icons";
 
-import MainScreen from "../screens/MainScreen";
 import OrderScreen from "../screens/OrderScreen";
-import StackNavigation from "./StackNavigation";
+import ProfileStackNavigation from "./ProfileStackNavigation";
 
 import { themes } from "../theme/theme";
 import { useThemeStore } from "../store/useThemeStore";
+import HomeStackNavigation from "./HomeStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +17,7 @@ const TabNavigation = () => {
 
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
   const colors = themes[theme];
-
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -61,7 +59,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen
         name="Home"
-        component={MainScreen}
+        component={HomeStackNavigation}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
@@ -81,9 +79,9 @@ const TabNavigation = () => {
 
       <Tab.Screen
         name="Profile"
-        component={StackNavigation}
+        component={ProfileStackNavigation}
         options={{
-          headerShown: false,
+          
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
