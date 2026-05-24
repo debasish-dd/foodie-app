@@ -1,13 +1,14 @@
-import React from 'react'
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
-import { NavigationContainer } from '@react-navigation/native'
+import RootNavigation from "./src/navigations/RootNavigation";
 
-import TabNavigation from './src/navigations/TabNavigation'
-
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <TabNavigation />
+      <RootNavigation />
     </NavigationContainer>
-  )
-}
+  );
+};
+
+export default App;
